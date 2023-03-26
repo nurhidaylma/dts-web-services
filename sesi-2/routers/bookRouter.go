@@ -8,6 +8,15 @@ import (
 	ginSwagger "github.com/swaggo/gin-swagger"
 )
 
+// @title Books API
+// @version 1.0
+// @description This is a sample service for managing books
+// @termsOfService http://swagger.io/terms/
+// @contact.name Ilma
+// @license.name Apache 2.0
+// @license.url http://www.apache.org/licenses/LICENSE-2.0.html
+// @host localhost:8080
+// @BasePath /api/v1
 func StartServe() *gin.Engine {
 	r := gin.Default()
 	docs.SwaggerInfo.BasePath = "/api/v1"
@@ -21,7 +30,6 @@ func StartServe() *gin.Engine {
 
 	}
 	r.GET("/swagger/*any", ginSwagger.WrapHandler(swaggerfiles.Handler))
-	r.Run(":8080")
 
 	return r
 }

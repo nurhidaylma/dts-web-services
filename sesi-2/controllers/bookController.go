@@ -18,10 +18,11 @@ var books = []model.Book{}
 // @Description Create a single book by providing title, author, and desc
 // @Accept json
 // @Produce json
+// @Param data body model.Book true "Sample payload"
 // @Success 200 {object} response.JSONSuccessResult{data=model.Book,code=int,message=string}
 // @Failure 400 {object} response.JSONBadReqResult{code=int,message=string}
 // @Failure 500 {object} response.JSONIntServerErrReqResult{code=int,message=string}
-// @Router /api/v1/book [post]
+// @Router /book [post]
 func CreateBook(ctx *gin.Context) {
 	var book model.Book
 
@@ -46,10 +47,12 @@ func CreateBook(ctx *gin.Context) {
 // @Description Update a single book by providing title, author, and desc
 // @Accept json
 // @Produce json
+// @Param id path string true "Book ID"
+// @Param data body model.Book true "Sample payload"
 // @Success 200 {object} response.JSONSuccessResult{data=model.Book,code=int,message=string}
 // @Failure 400 {object} response.JSONBadReqResult{code=int,message=string}
 // @Failure 500 {object} response.JSONIntServerErrReqResult{code=int,message=string}
-// @Router /api/v1/book/{id} [put]
+// @Router /book/{id} [put]
 func UpdateBook(ctx *gin.Context) {
 	bookID := ctx.Param("bookID")
 	condition := false
@@ -93,10 +96,11 @@ func UpdateBook(ctx *gin.Context) {
 // @Description Get a single book by providing its ID
 // @Accept json
 // @Produce json
+// @Param id path string true "Sample payload"
 // @Success 200 {object} response.JSONSuccessResult{data=model.Book,code=int,message=string}
 // @Failure 400 {object} response.JSONBadReqResult{code=int,message=string}
 // @Failure 500 {object} response.JSONIntServerErrReqResult{code=int,message=string}
-// @Router /api/v1/book/{id} [get]
+// @Router /book/{id} [get]
 func GetBookByID(ctx *gin.Context) {
 	bookID := ctx.Param("bookID")
 	condition := false
@@ -135,7 +139,7 @@ func GetBookByID(ctx *gin.Context) {
 // @Success 200 {object} response.JSONSuccessResult{data=model.Book,code=int,message=string}
 // @Failure 400 {object} response.JSONBadReqResult{code=int,message=string}
 // @Failure 500 {object} response.JSONIntServerErrReqResult{code=int,message=string}
-// @Router /api/v1/books [get]
+// @Router /books [get]
 func GetBooks(ctx *gin.Context) {
 	ctx.JSON(http.StatusOK, gin.H{
 		"Book": books,
@@ -150,10 +154,11 @@ func GetBooks(ctx *gin.Context) {
 // @Description Delete a single book by providing its ID
 // @Accept json
 // @Produce json
+// @Param id path string true "Sample payload"
 // @Success 200 {object} response.JSONSuccessResult{data=model.Book,code=int,message=string}
 // @Failure 400 {object} response.JSONBadReqResult{code=int,message=string}
 // @Failure 500 {object} response.JSONIntServerErrReqResult{code=int,message=string}
-// @Router /api/v1/book/{id} [delete]
+// @Router /book/{id} [delete]
 func DeleteBook(ctx *gin.Context) {
 	bookID := ctx.Param("bookID")
 	condition := false

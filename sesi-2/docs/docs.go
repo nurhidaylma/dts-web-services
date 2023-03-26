@@ -10,13 +10,22 @@ const docTemplate = `{
     "info": {
         "description": "{{escape .Description}}",
         "title": "{{.Title}}",
-        "contact": {},
+        "termsOfService": "http://swagger.io/terms/",
+        "contact": {
+            "name": "API Support",
+            "url": "http://www.swagger.io/support",
+            "email": "support@swagger.io"
+        },
+        "license": {
+            "name": "Apache 2.0",
+            "url": "http://www.apache.org/licenses/LICENSE-2.0.html"
+        },
         "version": "{{.Version}}"
     },
     "host": "{{.Host}}",
     "basePath": "{{.BasePath}}",
     "paths": {
-        "/api/v1/book": {
+        "/book": {
             "post": {
                 "description": "Create a single book by providing title, author, and desc",
                 "consumes": [
@@ -26,6 +35,17 @@ const docTemplate = `{
                     "application/json"
                 ],
                 "summary": "Create a single book",
+                "parameters": [
+                    {
+                        "description": "Sample payload",
+                        "name": "data",
+                        "in": "body",
+                        "required": true,
+                        "schema": {
+                            "$ref": "#/definitions/model.Book"
+                        }
+                    }
+                ],
                 "responses": {
                     "200": {
                         "description": "OK",
@@ -96,7 +116,7 @@ const docTemplate = `{
                 }
             }
         },
-        "/api/v1/book/{id}": {
+        "/book/{id}": {
             "get": {
                 "description": "Get a single book by providing its ID",
                 "consumes": [
@@ -106,6 +126,15 @@ const docTemplate = `{
                     "application/json"
                 ],
                 "summary": "Get a single book",
+                "parameters": [
+                    {
+                        "type": "string",
+                        "description": "Sample payload",
+                        "name": "id",
+                        "in": "path",
+                        "required": true
+                    }
+                ],
                 "responses": {
                     "200": {
                         "description": "OK",
@@ -184,6 +213,24 @@ const docTemplate = `{
                     "application/json"
                 ],
                 "summary": "Update a single book",
+                "parameters": [
+                    {
+                        "type": "string",
+                        "description": "Book ID",
+                        "name": "id",
+                        "in": "path",
+                        "required": true
+                    },
+                    {
+                        "description": "Sample payload",
+                        "name": "data",
+                        "in": "body",
+                        "required": true,
+                        "schema": {
+                            "$ref": "#/definitions/model.Book"
+                        }
+                    }
+                ],
                 "responses": {
                     "200": {
                         "description": "OK",
@@ -262,6 +309,15 @@ const docTemplate = `{
                     "application/json"
                 ],
                 "summary": "Delete a single book",
+                "parameters": [
+                    {
+                        "type": "string",
+                        "description": "Sample payload",
+                        "name": "id",
+                        "in": "path",
+                        "required": true
+                    }
+                ],
                 "responses": {
                     "200": {
                         "description": "OK",
@@ -332,7 +388,7 @@ const docTemplate = `{
                 }
             }
         },
-        "/api/v1/books": {
+        "/books": {
             "get": {
                 "description": "Create multiple books",
                 "consumes": [
@@ -477,17 +533,26 @@ const docTemplate = `{
                 }
             }
         }
+    },
+    "securityDefinitions": {
+        "BasicAuth": {
+            "type": "basic"
+        }
+    },
+    "externalDocs": {
+        "description": "OpenAPI",
+        "url": "https://swagger.io/resources/open-api/"
     }
 }`
 
 // SwaggerInfo holds exported Swagger Info so clients can modify it
 var SwaggerInfo = &swag.Spec{
-	Version:          "",
-	Host:             "",
-	BasePath:         "",
+	Version:          "1.0",
+	Host:             "localhost:8080",
+	BasePath:         "/api/v1",
 	Schemes:          []string{},
-	Title:            "",
-	Description:      "",
+	Title:            "Swagger Example Book API",
+	Description:      "This is a sample server celler server.",
 	InfoInstanceName: "swagger",
 	SwaggerTemplate:  docTemplate,
 }
