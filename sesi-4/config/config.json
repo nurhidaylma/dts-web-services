@@ -1,0 +1,11 @@
+{
+  "DATABASE_CONNECTION_STRING": "host=%s user=%s password=%s dbname=%s port=%s sslmode=%s",
+  "DATABASE_DRIVER": "postgres",
+  "DATABASE_HOST": "localhost",
+  "DATABASE_NAME": "dtskominfo",
+  "DATABASE_PASS": "ilmanurh",
+  "DATABASE_PORT": "5432",
+  "DATABASE_SSL": "disable",
+  "DATABASE_USER": "postgres",
+  "": ""
+}
